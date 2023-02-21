@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Formulario de demostración
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="demoForm" (ngSubmit)="submitForm()">
+    <ion-list>
+
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input type="text" formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="demoForm.controls.nombre.invalid && (demoForm.controls.nombre.dirty || demoForm.controls.nombre.touched)">
+        <ion-label color="danger" stacked>Error</ion-label>
+        <ion-text color="danger">
+          <p *ngIf="demoForm.controls.nombre.hasError('required')">El nombre es requerido.</p>
+          <p *ngIf="demoForm.controls.nombre.hasError('minlength')">El nombre debe tener al menos
+            {{demoForm.controls.nombre.errors.minlength.requiredLength}} caracteres.</p>
+          <p *ngIf="demoForm.controls.nombre.hasError('maxlength')">El nombre no puede tener más de
+            {{demoForm.controls.nombre.errors.maxlength.requiredLength}} caracteres.</p>
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="demoForm.controls.email.invalid && (demoForm.controls.email.dirty || demoForm.controls.email.touched)">
+        <ion-label color="danger" stacked>Error</ion-label>
+        <ion-text color="danger">
+          <p *ngIf="demoForm.controls.email.hasError('required')">El email es requerido.</p>
+          <p *ngIf="demoForm.controls.email.hasError('email')">El email no es válido.</p>
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contrasena</ion-label>
+        <ion-input type="password" formControlName="contrasena"></ion-input>
+      </ion-item>
+      <ion-item
+        *ngIf="demoForm.controls.contrasena.invalid && (demoForm.controls.contrasena.dirty || demoForm.controls.contrasena.touched)">
+        <ion-label color="danger" stacked>Error</ion-label>
+        <ion-text color="danger">
+          <p *ngIf="demoForm.controls.contrasena.hasError('required')">La contrasena es requerida.</p>
+          <p *ngIf="demoForm.controls.contrasena.hasError('minlength')">La contrasena debe tener al menos
+            {{demoForm.controls.contrasena.errors.minlength.requiredLength}} caracteres.</p>
+        </ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Sexo</ion-label>
+        <ion-select formControlName="sexo">
+          <ion-select-option value="hombre">Hombre</ion-select-option>
+          <ion-select-option value="mujer">Mujer</ion-select-option>
+          <ion-select-option value="otro">Otro</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item
+        *ngIf="demoForm.controls.sexo.invalid && (demoForm.controls.sexo.dirty || demoForm.controls.sexo.touched)">
+        <ion-label color="danger" stacked>Error</ion-label>
+        <ion-text color="danger">
+          <p *ngIf="demoForm.controls.sexo.hasError('required')">El sexo es requerida.</p>
+        </ion-text>
+      </ion-item>
+
+    </ion-list>
+    <ion-button type="submit" [disabled]="!demoForm.valid">Enviar</ion-button>
+  </form>
+</ion-content>

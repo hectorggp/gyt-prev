@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      User Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="searchUser($event.target.value)"></ion-searchbar>
+
+  <ion-card *ngIf="user">
+    <ion-card-header>
+      <ion-card-title>{{ user.name }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <img [src]="user.avatar_url" alt="{{ user.name }}">
+      <p>{{ user.bio }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list *ngIf="repositories.length > 0">
+    <ion-list-header>Public Repositories</ion-list-header>
+
+    <ion-item *ngFor="let repo of repositories">
+      <ion-icon name="folder" slot="start"></ion-icon>
+      <ion-label>{{ repo.name }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
